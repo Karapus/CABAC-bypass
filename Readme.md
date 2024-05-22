@@ -82,3 +82,5 @@ QP,YUV_PSNR,Bytes
 To compute the BD-rate a [Python script](getBDRate.py) is employed.
 
 Resulting BD-PSNR difference is 0.02834.
+
+![image](https://github.com/Karapus/CABAC-bypass/assets/45774052/e7ab6dc2-3eba-4f70-8ea2-32150f51e860)
