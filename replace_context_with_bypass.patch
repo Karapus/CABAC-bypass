@@ -1,0 +1,37 @@
+diff --git a/source/Lib/TLibEncoder/TEncBinCoderCABACCounter.cpp b/source/Lib/TLibEncoder/TEncBinCoderCABACCounter.cpp
+index 1520b998..18f83bcd 100644
+--- a/source/Lib/TLibEncoder/TEncBinCoderCABACCounter.cpp
++++ b/source/Lib/TLibEncoder/TEncBinCoderCABACCounter.cpp
+@@ -73,31 +73,8 @@ UInt TEncBinCABACCounter::getNumWrittenBits()
+  */
+ Void TEncBinCABACCounter::encodeBin( UInt binValue, ContextModel &rcCtxModel )
+ {
+-#if DEBUG_ENCODER_SEARCH_BINS
+-  const UInt64 startingFracBits = m_fracBits;
+-#endif
+-
+   m_uiBinsCoded += m_binCountIncrement;
+-  m_fracBits += rcCtxModel.getEntropyBits( binValue );
+-  rcCtxModel.update( binValue );
+-
+-#if DEBUG_ENCODER_SEARCH_BINS
+-  if ((g_debugCounter + debugEncoderSearchBinWindow) >= debugEncoderSearchBinTargetLine)
+-  {
+-    std::cout << g_debugCounter << ": coding bin value " << binValue << ", fracBits = [" << startingFracBits << "->" << m_fracBits << "]\n";
+-  }
+-
+-  if (g_debugCounter >= debugEncoderSearchBinTargetLine)
+-  {
+-    UChar breakPointThis;
+-    breakPointThis = 7;
+-  }
+-  if (g_debugCounter >= (debugEncoderSearchBinTargetLine + debugEncoderSearchBinWindow))
+-  {
+-    exit(0);
+-  }
+-  g_debugCounter++;
+-#endif
++  m_fracBits += 32768;
+ }
+ 
+ /**
