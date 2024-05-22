@@ -6,7 +6,7 @@ To build the [HEVC Test Model](https://vcgit.hhi.fraunhofer.de/jvet/HM/-/tree/ma
 
 This was done by [a patch to the build system](disable_warnings.patch).
 
-## Collecting reference results
+## Collecting reference data
 
 To collect necessary data a [Bash script](run-encoder.sh) was employed.
 
@@ -51,3 +51,34 @@ Which implementation is used depends on macro (`FAST_BIT_EST`)[https://vcgit.hhi
 Therefore, the implementation from `TEncBinCABACCounter` is used and is the only one that needs to be modifyed.
 
 This is done by [another patch](replace_context_with_bypass.patch).
+
+## Collecting data for modifyed software
+
+Done in a similar fashion:
+```
+> run-encoder.sh \
+        <PATH_TO_ENCODER> \
+        <PATH_TO_INPUT_FILE> \
+        <PATH_TO_CONFIG_FILE> \
+        <SOURCE_WIDTH> \
+        <SOURCE_HEIGHT> \
+        <FRAME_RATE> \
+        <INPUT_BIT_DEPTH> \
+    > modifyed.csv
+```
+
+The resulting CSV:
+```
+> cat modified.csv
+QP,YUV_PSNR,Bytes
+22,39.8368,49075
+27,36.5680,27676
+32,33.8599,16378
+37,31.3112,10261
+```
+
+## Computing BD-rate
+
+To compute the BD-rate a [Python script](getBDRate.py) is employed.
+
+Resulting BD-PSNR difference is 0.02834.
